@@ -23,7 +23,7 @@ function main() {
             } else if (bestScores[user] < guesses.length) {
                 alert(`${user}, your best score was ${scoreDifference * -1} better.`)
             } else (
-                alert(`${user}, you tied your best score of ${bestScores[user].}`)
+                alert(`${user}, you tied your best score of ${bestScores[user]}`)
             )
         }
 
