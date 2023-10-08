@@ -27,7 +27,7 @@ function main() {
         while (guess !== randomNumber) {
             guess = parseInt(prompt(`${user}, guess a number between ${min} and ${max}.`))
             // only counts guesses within the range and are real numbers
-            if (guess > min && guess < max && guess !== NaN) {
+            if (guess >= min && guess <= max && guess !== NaN) {
                 guesses.push(guess)
                 if (guess === randomNumber) {
                     alert(`Correct, ${user}!\nIt took you, ${guesses.length} guesses. These were your picks\n ${guesses}.`)
