@@ -37,11 +37,18 @@ function main() {
                 alert(`Correct, ${user}! It took you, ${guesses.length} guesses. These were your guesses ${guesses}.`)
                 //  envokes feature 7 after finding the correct number.
                 compareScore(user, guesses);
-            } else if (guess > randomNumber) {
-                alert(`Sorry ${user}, too high, guess lower than ${guess} .`)
-            } else {
-                alert(`Sorry ${user}, too low, guess higher than ${guess}.`)
             }
+            // guess is greater than randomNumber, will change range from guess to max
+            else if (guess > randomNumber) {
+                if (max > guess) max = guess;
+                alert(`Sorry ${user}, too high. Guess between ${min} and ${max}.`)
+            }
+            // guess is lower than randomNumber, will change range from guess to min
+            else {
+                if (min < guess) min = guess;
+                alert(`Sorry ${user}, too low. Guess between ${min} and ${max}.`)
+            }
+
         }
 
         // feature 7 compare score with users previous score and display the difference.
@@ -52,21 +59,21 @@ function main() {
 
             // creates new user in bestScores obj if new user
             if (bestScores[user] === undefined) {
-                bestScores[user] = guesses.length;
-                alert(`${user}, ${guesses.length} is your best score!`)
+                bestScores[user] = currentScore;
+                alert(`${user}, ${currentScore} is your best score!`)
             }
             // user's current score beats bestScore, updates bestScore w/ currentScore
-            else if (bestScores[user] > guesses.length) {
+            else if (usersBest > currentScore) {
                 alert(`${user}! You beat your best score of ${usersBest} by ${scoreDifference}.`);
-                bestScores[user] = guesses.length;
+                bestScores[user] = currentScore;
             }
             // user's bestScore is better than current score and difference between    
-            else if (bestScores[user] < guesses.length) {
-                alert(`${user}, your best score of: ${usersBest} was ${scoreDifference * -1} better.`)
+            else if (usersBest < currentScore) {
+                alert(`${user}, your best score of ${usersBest} was ${scoreDifference * -1} better.`)
             }
             // user ties bestScore    
             else (
-                alert(`${user}, you tied your best score of: ${bestScores[user]}`)
+                alert(`${user}, you tied your best score of ${usersBest}`)
             )
         }
     }
