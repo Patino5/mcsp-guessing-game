@@ -4,51 +4,48 @@ function main() {
     const bestScores = {};
     // Do you want to play again feature
     let playing = "yes";
-    while (playing.toLowerCase() === 'yes') {
+    while (playing === 'yes') {
         guessingGame();
-        playing = prompt('Do you want to play again?')
+        playing = prompt('Do you want to play again?').toLowerCase()
     }
     // if answer !yes will end game and respond thanks for playing
     alert("Thanks for playing!")
 
-    // Guessing Game set up
+    // Guessing Game set up function
     function guessingGame() {
         let guess = undefined;
         let guesses = [];
         let min = 1;
         let max = 100;
         // generate a random number between 1 and 100
-        let randomNumber = 50//Math.round(Math.random() * (max - min + 1) + min);
+        let randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
+        // gets user's name
         let user = prompt("What is your name?").trim();
-
-        //ensure guess in a number within range of min and max
-        // function aRealNumber(num) {
-        //     num = parseInt(prompt('What is your guess?'));
-        //     while (num > max && num < min || num === NaN) {
-        //         prompt(`Guess not within range, please pick between ${min} and ${max}.`)
-        //     }
-        // }
 
         // block of code is the while loop of conditional checking guessed number against randomNumber
         while (guess !== randomNumber) {
             guess = parseInt(prompt(`${user}, guess a number between ${min} and ${max}.`))
-            guesses.push(guess)
-            if (guess === randomNumber) {
-                alert(`Correct, ${user}! It took you, ${guesses.length} guesses. These were your guesses ${guesses}.`)
-                //  envokes feature 7 after finding the correct number.
-                compareScore(user, guesses);
+            // only counts guesses within the range and are real numbers
+            if (guess > min && guess < max && guess !== NaN) {
+                guesses.push(guess)
+                if (guess === randomNumber) {
+                    alert(`Correct, ${user}!\nIt took you, ${guesses.length} guesses. These were your picks\n ${guesses}.`)
+                    //  envokes feature 7 after finding the correct number.
+                    compareScore(user, guesses);
+                }
+                // guess is greater than randomNumber, will change range from guess to max
+                else if (guess > randomNumber) {
+                    if (max > guess) max = guess;
+                    alert(`Sorry ${user}, too high.\nGuess between ${min} and ${max}.`)
+                }
+                // guess is lower than randomNumber, will change range from guess to min
+                else {
+                    if (min < guess) min = guess;
+                    alert(`Sorry ${user}, too low.\nGuess between ${min} and ${max}.`)
+                }
+            } else {
+                guess = alert(`${guess} not within range, will not count.\nPlease pick a number between ${min} and ${max}.`);
             }
-            // guess is greater than randomNumber, will change range from guess to max
-            else if (guess > randomNumber) {
-                if (max > guess) max = guess;
-                alert(`Sorry ${user}, too high. Guess between ${min} and ${max}.`)
-            }
-            // guess is lower than randomNumber, will change range from guess to min
-            else {
-                if (min < guess) min = guess;
-                alert(`Sorry ${user}, too low. Guess between ${min} and ${max}.`)
-            }
-
         }
 
         // feature 7 compare score with users previous score and display the difference.
@@ -79,33 +76,3 @@ function main() {
     }
 }
 main();
-// create a range new range after each guess
-// r num lower first   r num  higher than first
-// min and firstGuess || firstGuess and max 
-
-// lwr thn nxt       hghr thn nxt bt lwr thn 1st   hghr thn 1st bt lwr thn nxt  hghr thn 1st
-// min and nextGuess || nextGuess btwn firstGuess || firstGuess btwn nextrGuess || nextGuess and max
-/*
-let min = 1;
-let max = 100;
-let lastGuess = guesses.pop()
-let firstGuess = guesses[0]
-
-if (guess < max)
-    return `${user} guess too low, guess between ${guess} and ${max}`
-    min = guess;
-if (min < guess){
-    return `${user} guess too high, guess between ${min} and ${guess}`
-    max = guess;
-}
-if (min < lastGuess)
-    return `${user} guess too high, guess between ${min} and ${guess}` 
-if (lastGuess < max)
-    return `${user} guess too low, guess between ${guess} and ${max}`
-
-if (lastGuess < firstGuess)
-
-    return `${user} guess too low, guess between ${lastGuess} and ${firstGuess}
-
-if (firstGuess >)
-*/
