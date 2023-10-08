@@ -13,11 +13,12 @@ function main() {
 
     // Guessing Game set up function
     function guessingGame() {
-        let guess = undefined;
+        let guess;
         let guesses = [];
+        // start range, changes with response of user 
         let min = 1;
         let max = 100;
-        // generate a random number between 1 and 100
+        // generate a random number between 1 and 100 for number to guess
         let randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
         // gets user's name
         let user = prompt("What is your name?").trim();
@@ -57,20 +58,20 @@ function main() {
             // creates new user in bestScores obj if new user
             if (bestScores[user] === undefined) {
                 bestScores[user] = currentScore;
-                alert(`${user}, ${currentScore} is your best score!`)
+                alert(`${user}, ${currentScore} is your best game!`)
             }
             // user's current score beats bestScore, updates bestScore w/ currentScore
             else if (usersBest > currentScore) {
-                alert(`${user}! You beat your best score of ${usersBest} by ${scoreDifference}.`);
+                alert(`${user}! You beat your best game of ${usersBest} by ${scoreDifference}.`);
                 bestScores[user] = currentScore;
             }
             // user's bestScore is better than current score and difference between    
             else if (usersBest < currentScore) {
-                alert(`${user}, your best score of ${usersBest} was ${scoreDifference * -1} better.`)
+                alert(`${user}, your best game of ${usersBest} was ${scoreDifference * -1} better.`)
             }
             // user ties bestScore    
             else (
-                alert(`${user}, you tied your best score of ${usersBest}`)
+                alert(`${user}, you tied your best game of ${usersBest}`)
             )
         }
     }
