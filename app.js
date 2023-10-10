@@ -1,15 +1,16 @@
 // self invoking function to start the game
-function main() {
+function startGame() {
     // object that will hold all players' names and best scores
     const bestScores = {};
-    // Do you want to play again feature
-    let playing = "yes";
-    while (playing === 'yes') {
-        guessingGame();
-        playing = prompt('Do you want to play again?').toLowerCase()
+    
+    function playAgain(user){
+        let playing = prompt(`${user}, do you want to play again?`).toLowerCase()
+        if(playing === 'yes'){
+            guessingGame();
+        } else 
+        //if answer !yes will end game and respond thanks for playing
+            alert(`Thanks for playing ${user}!`)
     }
-    // if answer !yes will end game and respond thanks for playing
-    alert("Thanks for playing!")
 
     // Guessing Game set up function
     function guessingGame() {
@@ -33,6 +34,7 @@ function main() {
                     alert(`Correct, ${user}!\nIt took you, ${guesses.length} guesses. These were your picks\n ${guesses}.`)
                     //  envokes feature 7 after finding the correct number.
                     compareScore(user, guesses);
+                    playAgain(user);
                 }
                 // guess is greater than randomNumber, will change range from guess to max
                 else if (guess > randomNumber) {
@@ -75,5 +77,11 @@ function main() {
             )
         }
     }
+    guessingGame();
 }
-main();
+startGame();
+
+
+/*
+
+*/
